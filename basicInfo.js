@@ -5,7 +5,7 @@ const swaggerJsDoc = require('swagger-jsdoc');
 const morgan = require('morgan');
 const router = require('./Controller/StudentApp.js').router;
 const app = express();
-app.use(cors());
+//app.use(cors());
 app.use(morgan("dev"));
 
 const options = {

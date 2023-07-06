@@ -4,6 +4,7 @@ const CreateStudent = require('../Repository/StudentRepository').CreateStudent;
 const GetStudentById = require('../Repository/StudentRepository').GetStudentById;
 const UpdateStudentById = require('../Repository/StudentRepository').UpdateStudentById;
 const DeleteStudentById = require('../Repository/StudentRepository').DeleteStudentById;
+const SendMail = require('../Repository/StudentRepository').SendMail;
 
 const express = require('express');
 const router = express.Router();
@@ -243,4 +244,14 @@ router.delete('/api/students/:id',(req,res)=>{
         res.send("Deleted successfully");
     });
 });
+
+router.post("/api/mail",(req,res)=>{
+    var data =  req.body;
+    SendMail(data,(err)=>{
+        if(err){
+            res.status(500).send(err);
+        }
+        res.send("Mail sent");
+    })
+})
 exports.router = router;

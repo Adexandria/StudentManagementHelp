@@ -1,4 +1,5 @@
 const Student = require('../Model/student.js').Student;
+const superagent = require('superagent');
 const GetAllStudents = (done)=>
 {
     Student.find((err,data)=>
@@ -37,8 +38,18 @@ const DeleteStudentById=(id,done)=>{
     });
 };
 
+const SendMail = async (data) =>{
+try{
+    const {body} = await superagent.post('https://cyphercrescent-email-service.azurewebsites.net/api/mail')
+    .send(data)
+    console.log(body)
+}catch(err){
+    console.error(err)
+}
+};
 exports.GetAllStudents = GetAllStudents;
 exports.CreateStudent = CreateStudent;
 exports.GetStudentById = GetStudentById;
 exports.UpdateStudentById = UpdateStudentById;
 exports.DeleteStudentById = DeleteStudentById;
+exports.SendMail = SendMail;
